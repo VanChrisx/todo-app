@@ -13,7 +13,7 @@ const TodoList = ({
   activeFilterActive,
 }) => {
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       {todos.map((todo) => {
         return (
           <Todo

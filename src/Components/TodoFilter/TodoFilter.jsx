@@ -34,8 +34,13 @@ const TodoFilter = ({
           active={activeFilter}
           filter="completed"
         />
+        <Button
+          style={{ backgroundColor: "#302B61" }}
+          onClick={() => handleClearCompleted()}
+          variant="contained">
+          Clear completed
+        </Button>
       </ButtonFilterContainer>
-      <Button onClick={() => handleClearCompleted()}>Clear completed</Button>
     </TodoFilterContainer>
   );
 };

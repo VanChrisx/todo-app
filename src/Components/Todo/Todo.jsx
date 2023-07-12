@@ -7,9 +7,19 @@ const Todo = ({ todos, handleSetComplete, handleSetDelete }) => {
   const { completed, title, id } = todos;
   console.log(completed);
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        backgroundColor: "#413D5E",
+        padding: "2%",
+        borderRadius: "15px",
+        marginTop: "1%",
+      }}>
       <FormControlLabel
         label={title}
+        style={{ width: "100%", color: "white" }}
         control={
           <Checkbox
             value={id}
@@ -19,7 +29,7 @@ const Todo = ({ todos, handleSetComplete, handleSetDelete }) => {
           />
         }
       />
-      <Button onClick={() => handleSetDelete(id)}>Delete</Button>
+      <Button onClick={() => handleSetDelete(id)}>Borrar</Button>
     </div>
   );
 };

@@ -1,12 +1,11 @@
 import Title from "../Title/Title";
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import TodoInput from "../TodoInput/TodoInput";
 import TodoList from "../TodoList/TodoList";
 import { useEffect, useState } from "react";
 
 const TodoStructure = () => {
   const [todos, setTodo] = useState([]);
-
   const [activeFilter, setActiveFilter] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState(todos);
 
@@ -19,6 +18,17 @@ const TodoStructure = () => {
     });
     setTodo(updateList);
   };
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("todos"));
+    if (items) {
+      setTodo(items);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const handleSetDelete = (id) => {
     const updateList = todos.filter((todo) => todo.id !== id);
@@ -70,19 +80,48 @@ const TodoStructure = () => {
 
   console.log(activeFilter);
   return (
-    <Container maxWidth="xs">
-      <Title />
-      <TodoInput addTodo={addTodo} />
-      <TodoList
-        todos={filteredTodos}
-        activeFilter={activeFilter}
-        handleSetComplete={handleSetComplete}
-        handleSetDelete={handleSetDelete}
-        activeFilterCompleted={activeFilterCompleted}
-        activeFilterActive={activeFilterActive}
-        activeFilterAll={activeFilterAll}
-        handleClearCompleted={handleClearCompleted}
-      />
+    <Container
+      maxWidth="md"
+      style={{ backgroundColor: "#4B5174", borderRadius: "15px" }}>
+      <Grid
+        container
+        spacing={1}
+        xs={12}
+        md={10}
+        p={2}
+        m={"20% auto"}>
+        <Grid
+          item
+          container
+          xs={12}
+          md={12}>
+          <Title />
+        </Grid>
+        <Grid
+          item
+          container
+          xs={12}
+          md={12}>
+          <TodoInput addTodo={addTodo} />
+        </Grid>
+        <Grid
+          item
+          container
+          xs={12}
+          md={12}
+          style={{ width: "100%" }}>
+          <TodoList
+            todos={filteredTodos}
+            activeFilter={activeFilter}
+            handleSetComplete={handleSetComplete}
+            handleSetDelete={handleSetDelete}
+            activeFilterCompleted={activeFilterCompleted}
+            activeFilterActive={activeFilterActive}
+            activeFilterAll={activeFilterAll}
+            handleClearCompleted={handleClearCompleted}
+          />
+        </Grid>
+      </Grid>
     </Container>
   );
 };
