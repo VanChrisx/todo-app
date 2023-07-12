@@ -5,4 +5,5 @@
 }
 body {
   background-color: rgb(40, 40, 54);
+  background-image: url("./asset/bg-texture.png");
 }
